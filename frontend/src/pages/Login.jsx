@@ -44,6 +44,22 @@ function Login(){
         }
     }
 
+    const getPlans = async () => {
+        const token = localStorage.getItem("token");
+        try{
+            const response = await axios.get("http://localhost:5000/my-plans",
+                {
+                    headers:{
+                        Authorization: `Bearer ${token}`
+                    }
+                }
+            );
+            console.log(response.data);
+        }catch(err){
+            console.log(err);
+        }
+    }
+
     return(
         <>
         <div style={{margin: "30px"}}>
@@ -61,6 +77,7 @@ function Login(){
                 
             </form>
             <button type="button" onClick={getProfile}>Get Profile</button>
+            <button type="button" onClick={getPlans}>Get plans</button>
         </div>
         </>
     );

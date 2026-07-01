@@ -27,6 +27,17 @@ app.get("/profile", protect, (req,res)=>{
     });
 })
 
+app.get("/my-plans", protect, (req,res) => {
+    res.json({
+        message:"Plans fetched successfully",
+        plans:[
+            "DSA",
+            "ML",
+            "React"
+        ]
+    });
+});
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT,()=>{
