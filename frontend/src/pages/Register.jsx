@@ -36,7 +36,7 @@ function Register(){
         <div style={{
             margin:"20px"
         }}>
-            <h2>React form</h2>
+            <h2>Registration Form</h2>
             <form onSubmit={handleSubmit}>
                 <label>Name:
                     <input type="text" name="name" value={formData.name} onChange={handleChange}/>
