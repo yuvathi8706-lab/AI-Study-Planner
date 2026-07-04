@@ -50,7 +50,7 @@ const getPlans = async(req, res) => {
     }
 }
 
-const updatPlan = async(req, res) => {
+const updatePlan = async(req, res) => {
     try{
         const plan = await StudyPlan.findById(req.params.id);
         if(!plan){
@@ -84,4 +84,31 @@ const updatPlan = async(req, res) => {
     }
 };
 
-module.exports = {createPlan};
+const deletePlan = async(req, res) => {
+    try{
+        const plan = await StudyPlan.findById(req.params.id);
+        if(!plan){
+            return res.status(404).json({
+                message: " Study plan not found"
+            });
+        }
+
+        if(plan.userId.toString() != req.user.userId){
+            return res.status(403).json({
+                message: "Forbidden"
+            });
+        }
+
+        await plan.deleteOne();
+        return res.status(200).json({
+            message: "Study plan succesfully deleted"
+        });
+    }
+    catch(err){
+        return res.status(500).jason({
+            message: "Server error"
+        });
+    }
+};
+
+module.exports = {createPlan, getPlans, updatePlan};
