@@ -1,0 +1,25 @@
+.create-plan-container {
+  max-width: 500px;
+  margin: 30px auto;
+  padding: 20px;
+}
+
+.create-plan-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.create-plan-form input,
+.create-plan-form select {
+  padding: 10px;
+  font-size: 16px;
+}
+
+.create-plan-form button {
+  padding: 12px;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
