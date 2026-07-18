@@ -105,10 +105,10 @@ const deletePlan = async(req, res) => {
         });
     }
     catch(err){
-        return res.status(500).jason({
+        return res.status(500).json({
             message: "Server error"
         });
     }
 };
 
-module.exports = {createPlan, getPlans, updatePlan};
+module.exports = {createPlan, getPlans, updatePlan, deletePlan};

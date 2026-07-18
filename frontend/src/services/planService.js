@@ -2,6 +2,19 @@ import axios from "axios";
 
 const API = "http://localhost:5000/api/plans";
 
+export const getPlans = async () => {
+    const token = localStorage.getItem("token");
+    const response = await axios.get(
+        API,
+        {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }
+    );
+    return response.data;
+};
+
 export const createPlan = async (planData) => {
 
     const token = localStorage.getItem("token");
@@ -70,4 +83,24 @@ Authorization:`Bearer ${token}`
 
 return response.data;
 
-}
+};
+
+export const deletePlan = async (id) => {
+
+    const token = localStorage.getItem("token");
+
+    const response = await axios.delete(
+
+        `${API}/${id}`,
+
+        {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }
+
+    );
+
+    return response.data;
+
+};

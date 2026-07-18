@@ -5,7 +5,7 @@ const protect = (req,res,next) => {
         console.log("Middleware hit");
         const authHeader = req.headers.authorization;
         if(!authHeader){
-            return res.json.status(401).json({
+            return res.status(401).json({
                 message:"No token"
             });
         }

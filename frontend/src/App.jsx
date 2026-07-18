@@ -4,6 +4,9 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import Register from "./pages/Register";
+import MyPlans from "./pages/MyPlans";
+import GeneratePlan from "./pages/GeneratePlan";
+import CreatePlan from "./pages/CreatePlan";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App(){

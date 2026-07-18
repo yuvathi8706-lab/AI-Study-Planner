@@ -44,7 +44,7 @@ plans.map((plan)=>(
 
 <h2>{plan.subject}</h2>
 
-<p>Hours : {plan.hours}</p>
+<p>Hours : {plan.plannedHours}</p>
 
 <p>Deadline : {plan.deadline}</p>
 
