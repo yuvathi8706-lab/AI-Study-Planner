@@ -1,106 +1,68 @@
-import axios from "axios";
-
-const API = "http://localhost:5000/api/plans";
+import api from "./api";
 
 export const getPlans = async () => {
-    const token = localStorage.getItem("token");
-    const response = await axios.get(
-        API,
-        {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        }
-    );
-    return response.data;
+  const token = localStorage.getItem("token");
+  const response = await api.get(
+    "/plans",
+    {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+  );
+  return response.data;
 };
 
 export const createPlan = async (planData) => {
-
-    const token = localStorage.getItem("token");
-
-    const response = await axios.post(
-
-        API,
-
-        planData,
-
-        {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        }
-
-    );
-
-    return response.data;
-
+  const token = localStorage.getItem("token");
+  const response = await api.post(
+    "/plans",
+    planData,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+  );
+  return response.data;
 };
 
 export const updatePlan = async (id, planData) => {
-
-    const token = localStorage.getItem("token");
-
-    const response = await axios.put(
-
-        `${API}/${id}`,
-
-        planData,
-
-        {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        }
-
-    );
-
-    return response.data;
-
+  const token = localStorage.getItem("token");
+  const response = await api.put(
+    `/plans/${id}`,
+    planData,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+  );
+  return response.data;
 };
 
-export const getPlanById = async(id)=>{
-
-const token=localStorage.getItem("token");
-
-const response=
-
-await axios.get(
-
-`${API}/${id}`,
-
-{
-
-headers:{
-
-Authorization:`Bearer ${token}`
-
-}
-
-}
-
-);
-
-return response.data;
-
+export const getPlanById = async (id) => {
+  const token = localStorage.getItem("token");
+  const response = await api.get(
+    `/plans/${id}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+  );
+  return response.data;
 };
 
 export const deletePlan = async (id) => {
-
-    const token = localStorage.getItem("token");
-
-    const response = await axios.delete(
-
-        `${API}/${id}`,
-
-        {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        }
-
-    );
-
-    return response.data;
-
-};
+  const token = localStorage.getItem("token");
+  const response = await api.delete(
+    `/plans/${id}`,
+    {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }
+  );
+  return response.data;
+};

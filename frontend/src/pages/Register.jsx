@@ -59,8 +59,8 @@
 // export default Register;
 
 import { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { register } from "../services/authService";
 
 function Register() {
   const navigate = useNavigate();
@@ -84,10 +84,7 @@ function Register() {
     e.preventDefault();
 
     try {
-      await axios.post(
-        "http://localhost:5000/api/auth/register",
-        formData
-      );
+      await register(formData);
 
       alert("Registration Successful");
 
@@ -98,41 +95,73 @@ function Register() {
     }
   };
 
+
   return (
-    <div>
-      <h1>Register</h1>
+    <div className="auth-page">
+      <div className="auth-card">
+        <div className="auth-header">
+          <h1>Get Started</h1>
+          <p>Create an account to begin planning</p>
+        </div>
 
-      <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="name">Full Name</label>
+            <input
+              id="name"
+              type="text"
+              name="name"
+              placeholder="John Doe"
+              value={formData.name}
+              onChange={handleChange}
+              className="input-field"
+              required
+            />
+          </div>
 
-        <input
-          type="text"
-          name="name"
-          placeholder="Name"
-          value={formData.name}
-          onChange={handleChange}
-        />
+          <div className="form-group">
+            <label htmlFor="email">Email Address</label>
+            <input
+              id="email"
+              type="email"
+              name="email"
+              placeholder="name@example.com"
+              value={formData.email}
+              onChange={handleChange}
+              className="input-field"
+              required
+            />
+          </div>
 
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-        />
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <input
+              id="password"
+              type="password"
+              name="password"
+              placeholder="••••••••"
+              value={formData.password}
+              onChange={handleChange}
+              className="input-field"
+              required
+            />
+          </div>
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-        />
+          <button type="submit" className="btn btn-primary" style={{ marginTop: '10px' }}>
+            Register
+          </button>
+        </form>
 
-        <button type="submit">
-          Register
-        </button>
-
-      </form>
+        <p style={{ marginTop: '24px', fontSize: '0.9rem' }}>
+          Already have an account?{" "}
+          <span 
+            onClick={() => navigate("/")} 
+            style={{ color: 'var(--primary)', cursor: 'pointer', fontWeight: '600' }}
+          >
+            Login
+          </span>
+        </p>
+      </div>
     </div>
   );
 }

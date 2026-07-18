@@ -38,52 +38,85 @@ function CreatePlan() {
   };
 
   return (
-    <div>
-      <h1>Create Study Plan</h1>
+    <div className="form-page-container">
+      <div className="form-header">
+        <h1>Create Study Plan</h1>
+        <p>Set a new study target and deadline</p>
+      </div>
 
-      <form onSubmit={handleSubmit}>
+      <div className="glass-card">
+        <form onSubmit={handleSubmit} className="create-plan-form">
+          <div className="form-group">
+            <label htmlFor="subject">Subject Name</label>
+            <input
+              id="subject"
+              type="text"
+              name="subject"
+              placeholder="e.g. Data Structures & Algorithms"
+              value={formData.subject}
+              onChange={handleChange}
+              className="input-field"
+              required
+            />
+          </div>
 
-        <input
-          type="text"
-          name="subject"
-          placeholder="Subject"
-          value={formData.subject}
-          onChange={handleChange}
-          required
-        />
+          <div className="form-group">
+            <label htmlFor="plannedHours">Planned Hours</label>
+            <input
+              id="plannedHours"
+              type="number"
+              name="plannedHours"
+              placeholder="e.g. 40"
+              value={formData.plannedHours}
+              onChange={handleChange}
+              className="input-field"
+              required
+            />
+          </div>
 
-        <input
-          type="number"
-          name="plannedHours"
-          placeholder="Planned Hours"
-          value={formData.plannedHours}
-          onChange={handleChange}
-          required
-        />
+          <div className="form-group">
+            <label htmlFor="deadline">Target Deadline</label>
+            <input
+              id="deadline"
+              type="date"
+              name="deadline"
+              value={formData.deadline}
+              onChange={handleChange}
+              className="input-field"
+              required
+            />
+          </div>
 
-        <input
-          type="date"
-          name="deadline"
-          value={formData.deadline}
-          onChange={handleChange}
-          required
-        />
+          <div className="form-group">
+            <label htmlFor="status">Plan Status</label>
+            <select
+              id="status"
+              name="status"
+              value={formData.status}
+              onChange={handleChange}
+              className="input-field"
+            >
+              <option value="Pending">Pending</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Completed">Completed</option>
+            </select>
+          </div>
 
-        <select
-          name="status"
-          value={formData.status}
-          onChange={handleChange}
-        >
-          <option value="Pending">Pending</option>
-          <option value="In Progress">In Progress</option>
-          <option value="Completed">Completed</option>
-        </select>
-
-        <button type="submit">
-          Create Plan
-        </button>
-
-      </form>
+          <div style={{ display: 'flex', gap: '16px', marginTop: '16px' }}>
+            <button type="submit" className="btn btn-primary" style={{ flex: 1 }}>
+              Create Plan
+            </button>
+            <button 
+              type="button" 
+              onClick={() => navigate("/plans")} 
+              className="btn btn-secondary" 
+              style={{ width: 'auto' }}
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

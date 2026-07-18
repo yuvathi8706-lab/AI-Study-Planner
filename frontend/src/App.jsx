@@ -1,4 +1,4 @@
-import {BrowserRouter, Routes, Route} from "react-router-dom";
+import {BrowserRouter, Routes, Route, Outlet} from "react-router-dom";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -7,38 +7,35 @@ import Register from "./pages/Register";
 import MyPlans from "./pages/MyPlans";
 import GeneratePlan from "./pages/GeneratePlan";
 import CreatePlan from "./pages/CreatePlan";
+import EditPlan from "./pages/EditPlan";
 import ProtectedRoute from "./components/ProtectedRoute";
+import AppLayout from "./components/AppLayout";
 
 function App(){
   return(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login/>}/>
-        {/* <Route path="/login" element={<Login/>}/> */}
         <Route path="/register" element={<Register/>}/>
-        <Route path="/Dashboard" element={
+        
+        {/* Protected Routes sharing a common layout */}
+        <Route element={
           <ProtectedRoute>
-            <Dashboard/>
+            <AppLayout>
+              <Outlet />
+            </AppLayout>
           </ProtectedRoute>
-        }/>
-        <Route path ="/plans" element={
-          <ProtectedRoute>
-            <MyPlans/>
-          </ProtectedRoute>
-        }/>
-        <Route path="/generate-plan" element={
-          <ProtectedRoute>
-            <GeneratePlan/>
-          </ProtectedRoute>
-        }/>
-        <Route path="/create-plan" element={
-          <ProtectedRoute>
-            <CreatePlan/>
-          </ProtectedRoute>
-        }/>
+        }>
+          <Route path="/dashboard" element={<Dashboard/>}/>
+          <Route path="/plans" element={<MyPlans/>}/>
+          <Route path="/generate-plan" element={<GeneratePlan/>}/>
+          <Route path="/create-plan" element={<CreatePlan/>}/>
+          <Route path="/edit-plan/:id" element={<EditPlan/>}/>
+        </Route>
       </Routes>
     </BrowserRouter>
   );
 }
+
 
   export default App;

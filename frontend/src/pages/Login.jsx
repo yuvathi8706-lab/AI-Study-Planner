@@ -85,12 +85,14 @@
 
 // export default Login;
 
-import { useState } from "react";
-import axios from "axios";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { login } from "../services/authService";
+import { AuthContext } from "../context/AuthContext";
 
 function Login() {
   const navigate = useNavigate();
+  const { setToken } = useContext(AuthContext);
 
   const [formData, setFormData] = useState({
     email: "",
@@ -110,16 +112,9 @@ function Login() {
     e.preventDefault();
 
     try {
-      const response =
-        await axios.post(
-          "http://localhost:5000/api/auth/login",
-          formData
-        );
+      const data = await login(formData);
 
-      localStorage.setItem(
-        "token",
-        response.data.token
-      );
+      setToken(data.token);
 
       alert("Login Successful");
 
@@ -131,33 +126,59 @@ function Login() {
     }
   };
 
+
   return (
-    <div>
-      <h1>Login</h1>
+    <div className="auth-page">
+      <div className="auth-card">
+        <div className="auth-header">
+          <h1>Welcome Back</h1>
+          <p>Login to manage your study plans</p>
+        </div>
 
-      <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label htmlFor="email">Email Address</label>
+            <input
+              id="email"
+              type="email"
+              name="email"
+              placeholder="name@example.com"
+              value={formData.email}
+              onChange={handleChange}
+              className="input-field"
+              required
+            />
+          </div>
 
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-        />
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <input
+              id="password"
+              type="password"
+              name="password"
+              placeholder="••••••••"
+              value={formData.password}
+              onChange={handleChange}
+              className="input-field"
+              required
+            />
+          </div>
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-        />
+          <button type="submit" className="btn btn-primary" style={{ marginTop: '10px' }}>
+            Login
+          </button>
+        </form>
 
-        <button type="submit">
-          Login
-        </button>
-
-      </form>
+        <p style={{ marginTop: '24px', fontSize: '0.9rem' }}>
+          Don't have an account?{" "}
+          <span 
+            onClick={() => navigate("/register")} 
+            style={{ color: 'var(--primary)', cursor: 'pointer', fontWeight: '600' }}
+          >
+            Register
+          </span>
+        </p>
+      </div>
     </div>
   );
 }
